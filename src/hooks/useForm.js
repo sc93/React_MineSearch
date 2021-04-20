@@ -10,9 +10,12 @@ const useForm = () => {
     });
     const dispatch = useDispatch();
     // form 수정
-    const onChange = (e) => {
-        setGame({ ...game, [e.target.name]: parseInt(e.target.value) });
-    };
+    const onChange = useCallback(
+        (e) => {
+            setGame({ ...game, [e.target.name]: parseInt(e.target.value) });
+        },
+        [game],
+    );
     // new game
     const onClick = useCallback(() => {
         dispatch(
