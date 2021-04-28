@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GAME_END, GAME_FAIL, GAME_START } from '../lib/mineUtil';
 import { increment_timer, start_game } from '../modules/mine/mineSlice';
@@ -28,10 +28,9 @@ export const useGameInfo = () => {
         return () => {
             clearInterval(interval);
         };
-    }, [state, msg]);
+    }, [state]);
     // 초기화
-    const reGame = useCallback(() => {
-        dispatch(start_game({ width, height, mines }));
-    }, [dispatch, width, height, mines]);
+    const reGame = () => dispatch(start_game({ width, height, mines }));
+
     return { flags, timer, reGame };
 };

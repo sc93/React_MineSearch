@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { start_game } from '../modules/mine/mineSlice';
 
@@ -10,14 +10,11 @@ const useForm = () => {
     });
     const dispatch = useDispatch();
     // form 수정
-    const onChange = useCallback(
-        (e) => {
-            setGame({ ...game, [e.target.name]: parseInt(e.target.value) });
-        },
-        [game],
-    );
+    const onChange = (e) =>
+        setGame({ ...game, [e.target.name]: parseInt(e.target.value) });
+
     // new game
-    const onClick = useCallback(() => {
+    const onClick = () =>
         dispatch(
             start_game({
                 width: game.width,
@@ -25,7 +22,6 @@ const useForm = () => {
                 mines: game.mines,
             }),
         );
-    }, [dispatch, game.width, game.height, game.mines]);
 
     // 처음 실행될 때 기본 게임판 생성
     useEffect(() => {

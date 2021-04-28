@@ -35,7 +35,7 @@ export const mineSlice = createSlice({
             state.flags = mines;
             state.msg = '';
         },
-        restart_game: () => {
+        restart_game: (state, { payload: { width, height, mines } }) => {
             state.table = setMine(width, height, mines);
             state.state = GAME_START;
             state.timer = 0;
